@@ -1,0 +1,53 @@
+NORTHWIND ORDERS DATABASE - SOLUTIONS
+======================================
+
+ACTIVITY 1 - Basic SELECT
+--------------------------
+Q1: SELECT * FROM Customers WHERE Country = 'UK';
+Q2: SELECT * FROM Customers WHERE Country = 'UK' ORDER BY City;
+Q3: SELECT FirstName, LastName, BirthDate FROM Employees WHERE LastName = 'Callahan';
+Q4: SELECT * FROM Suppliers ORDER BY Country;
+Q5: SELECT * FROM Products WHERE Price < 20;
+Q6: SELECT * FROM Products ORDER BY Price DESC;
+
+ACTIVITY 2 - AND, OR, BETWEEN
+-------------------------------
+Q7: SELECT * FROM Customers WHERE Country = 'UK' OR Country = 'Germany';
+Q8: SELECT * FROM Customers WHERE Country = 'UK' AND City != 'London';
+Q9: SELECT * FROM Suppliers WHERE Country IN ('USA', 'Canada') ORDER BY SupplierName;
+Q10: SELECT * FROM Products WHERE Price BETWEEN 20 AND 40;
+
+ACTIVITY 3 - JOINs
+--------------------
+Q11: SELECT Products.* FROM Products JOIN Suppliers ON Products.SupplierID = Suppliers.SupplierID WHERE Suppliers.SupplierName = 'Leka Trading';
+Q12: SELECT Orders.* FROM Orders JOIN Customers ON Orders.CustomerID = Customers.CustomerID WHERE Customers.CustomerName = 'Island Trading';
+Q13: SELECT Products.* FROM Products JOIN Suppliers ON Products.SupplierID = Suppliers.SupplierID WHERE Suppliers.Country = 'UK';
+Q14: SELECT Products.ProductName, Suppliers.SupplierName, Suppliers.Country FROM Products JOIN Suppliers ON Products.SupplierID = Suppliers.SupplierID WHERE Suppliers.Country IN ('USA', 'Canada');
+Q15: SELECT DISTINCT Products.ProductName FROM Products JOIN OrderDetails ON Products.ProductID = OrderDetails.ProductID JOIN Orders ON OrderDetails.OrderID = Orders.OrderID JOIN Customers ON Orders.CustomerID = Customers.CustomerID WHERE Customers.CustomerName = 'Island Trading';
+Q16: SELECT DISTINCT Shippers.ShipperName FROM Shippers JOIN Orders ON Shippers.ShipperID = Orders.ShipperID JOIN Customers ON Orders.CustomerID = Customers.CustomerID WHERE Customers.Country = 'Argentina';
+Q17: SELECT DISTINCT Customers.CustomerName, Customers.ContactName FROM Customers JOIN Orders ON Customers.CustomerID = Orders.CustomerID JOIN Employees ON Orders.EmployeeID = Employees.EmployeeID WHERE Employees.FirstName = 'Robert' AND Employees.LastName = 'King' ORDER BY Customers.ContactName;
+
+ACTIVITY 4 - INSERT
+---------------------
+Q18: INSERT INTO Shippers (ShipperName, Phone) VALUES ('Global Shipping', '(503) 555-4523');
+Q19: INSERT INTO Employees (LastName, FirstName, BirthDate, Photo, Notes) VALUES ('Bond', 'James', '07/07/1977', NULL, 'Special Agent');
+Q20: INSERT INTO Products (ProductName, SupplierID, CategoryID, Unit, Price) VALUES ('Peanut Butter', 3, 7, '8 oz jars', 12);
+
+ACTIVITY 5 - UPDATE
+---------------------
+Q21: UPDATE Shippers SET Phone = '(503) 556-4592' WHERE ShipperName = 'Speedy Express';
+Q22: UPDATE Customers SET Address = '4 Wheels Drive', City = 'Dallas', PostalCode = '92302', Country = 'USA' WHERE CustomerName = 'The Big Cheese';
+Q23: UPDATE Products SET Price = Price + 1 WHERE Price < 20;
+
+ACTIVITY 6 - DELETE
+---------------------
+Q24: DELETE FROM Employees WHERE FirstName = 'Janet' AND LastName = 'Leverling';
+Q25: DELETE FROM OrderDetails WHERE OrderID = 10252;
+     DELETE FROM Orders WHERE OrderID = 10252;
+Q26: UPDATE OrderDetails SET Quantity = 3 WHERE OrderID = 10281 AND ProductID = (SELECT ProductID FROM Products WHERE ProductName = 'Teatime Chocolate Biscuits');
+
+ACTIVITY 7 - ALTER & CREATE
+-----------------------------
+Q27: ALTER TABLE Products ADD COLUMN StockLevel INTEGER DEFAULT 1;
+Q28: CREATE TABLE advertisingCampaigns (campaignID INTEGER PRIMARY KEY, StartDate TEXT, EndDate TEXT, TypeOfCampaign TEXT, Country TEXT, Description TEXT);
+Q29: INSERT INTO advertisingCampaigns VALUES (1, '01/01/2016', '29/02/2016', 'Radio Advert', 'USA', 'National campaign to promote our services in the USA');
